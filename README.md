@@ -52,6 +52,7 @@ $ docker run \
 	-e COOKIE_DOMAIN=example.com \
 	-e REFRESH_API_PATH=/example/refresh \
 	-e LICENSE_KEY_ID=yourLicenseKeyID \
+	-v /path/to/sqlite_data:/sqlite_db \
 	-d supertokens/supertokens-sqlite dev
 ```
 
@@ -70,7 +71,8 @@ $ docker run \
 	-p 3567:3567 \
 	-v /path/to/config.yaml:/usr/lib/supertokens/config.yaml \
 	-e LICENSE_KEY_ID=yourLicenseKeyID \
-	-d supertokens/supertokens-postgresql dev
+	-v /path/to/sqlite_data:/sqlite_db \
+	-d supertokens/supertokens-sqlite dev
 ```
 
 ## License Key
@@ -85,24 +87,22 @@ Please check this [link](https://supertokens.io/docs/community/about-license-key
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e POSTGRESQL_USER=postgresqlUser \
-	-e POSTGRESQL_PASSWORD=password \
 	-e COOKIE_DOMAIN=example.com \
 	-e REFRESH_API_PATH=/example/path \
 	-e LICENSE_KEY_ID=<your-license-key-id> \
-	-d supertokens/supertokens-postgresql production
+	-v /path/to/sqlite_data:/sqlite_db \
+	-d supertokens/supertokens-sqlite production
 ```
 
 #### Using your `licenseKey` file
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e POSTGRESQL_USER=postgresqlUser \
-	-e POSTGRESQL_PASSWORD=password \
 	-e COOKIE_DOMAIN=example.com \
 	-e REFRESH_API_PATH=/example/path \
 	-v /path/to/licenseKey:/usr/lib/supertokens/licenseKey \	
-	-d supertokens/supertokens-postgresql dev
+	-v /path/to/sqlite_data:/sqlite_db \
+	-d supertokens/supertokens-sqlite dev
 ```
 
 ## Logging
@@ -117,18 +117,15 @@ $ docker run \
 	-v /path/to/logsFolder:/home/logsFolder \
 	-e INFO_LOG_PATH=/home/logsFolder/info.log \
 	-e ERROR_LOG_PATH=/home/logsFolder/error.log \
-	-e POSTGRESQL_USER=postgresqlUser \
-	-e POSTGRESQL_PASSWORD=password \
 	-e COOKIE_DOMAIN=example.com \
 	-e REFRESH_API_PATH=/example/path \
 	-e LICENSE_KEY_ID=yourLicenseKeyId \
-	-d supertokens/supertokens-postgresql production
+	-v /path/to/sqlite_data:/sqlite_db \
+	-d supertokens/supertokens-sqlite production
 ```
 
-## Database setup
-- Before you start this container, make sure to [initialize your database](https://supertokens.io/docs/community/getting-started/database-setup/postgresql).
-- You do not need to ensure that the Postgresql database has started before this container is started. During bootup, SuperTokens will wait for ~1 hour for a Postgresql instance to be available.
-
+## Database storage
+The docker container stores SQLite data in `/sqlite_db` folder. You can mount a shared volume at that path to persist data across docker restarts.
 
 ## CLI reference
 Please refer to our [documentation](https://supertokens.io/docs/community/cli/overview) for this.
