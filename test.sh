@@ -58,7 +58,7 @@ NETWORK_OPTIONS="-p 3567:3567"
 
 #---------------------------------------------------
 # start with cookie domain and refresh API path
-docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh --rm --name supertokens supertokens-sqlite:circleci
 
 sleep 10s
 
