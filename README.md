@@ -49,21 +49,18 @@ Available environment variables
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e POSTGRESQL_USER=postgresqlUser \
-	-e POSTGRESQL_HOST=localhost \
-	-e POSTGRESQL_PORT=5432 \
-	-e POSTGRESQL_PASSWORD=password \
 	-e COOKIE_DOMAIN=example.com \
 	-e REFRESH_API_PATH=/example/refresh \
 	-e LICENSE_KEY_ID=yourLicenseKeyID \
-	-d supertokens/supertokens-postgresql dev
+	-d supertokens/supertokens-sqlite dev
 ```
 
 #### Using custom config file
 - In your `config.yaml` file, please make sure you store the following key / values:
   - `core_config_version: 0`
   - `host: "0.0.0.0"`
-  - `postgresql_config_version: 0`
+  - `sqlite_config_version: 0`
+  - `sqlite_database_folder_location: "/sqlite_db"`
   - `info_log_path: null` (to log in docker logs)
   - `error_log_path: null` (to log in docker logs)
 - The path for the `config.yaml` file in the container is `/usr/lib/supertokens/config.yaml`

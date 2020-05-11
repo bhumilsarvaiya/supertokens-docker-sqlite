@@ -82,7 +82,7 @@ test_equal `no_of_running_containers` 0 "start with cookie domain and license ke
 
 #---------------------------------------------------
 # start with cookie domain refresh API path and license key id
-docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm --name supertokens supertokens-sqlite:circleci
 
 sleep 17s
 
