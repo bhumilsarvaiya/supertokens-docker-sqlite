@@ -46,6 +46,9 @@ chown -R supertokens:supertokens /usr/lib/supertokens/
 
 if [ "$CONFIG_HASH" = "$CONFIG_MD5SUM" ]
 then
+
+    echo "sqlite_database_folder_location: \"/sqlite_db\"" >> $CONFIG_FILE
+
     # verify cookie domain is passed [mandatory]
     if [ -z $COOKIE_DOMAIN ]
     then

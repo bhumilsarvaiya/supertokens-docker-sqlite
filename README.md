@@ -36,16 +36,12 @@ Available environment variables
 	- SESSION\_EXPIRED\_STATUS\_CODE
 	- COOKIE\_SAME\_SITE
     - MAX\_SERVER\_POOL\_SIZE
-- **POSTGRESQL:** [[click for more info](https://supertokens.io/docs/community/configuration/database/postgresql)]	
-	- POSTGRESQL\_USER \[**required**\]
-	- POSTGRESQL\_PASSWORD \[**required**\]
-	- POSTGRESQL\_CONNECTION\_POOL\_SIZE
-	- POSTGRESQL\_HOST
-	- POSTGRESQL\_PORT
-	- POSTGRESQL\_DATABASE\_NAME
-	- POSTGRESQL\_KEY\_VALUE\_TABLE\_NAME
-	- POSTGRESQL\_SESSION\_INFO\_TABLE\_NAME
-	- POSTGRESQL\_PAST\_TOKENS\_TABLE\_NAME
+- **SQLITE:** [[click for more info](https://supertokens.io/docs/community/configuration/database/sqlite)]
+	- SQLITE\_CONNECTION\_POOL\_SIZE
+	- SQLITE\_DATABASE\_NAME
+	- SQLITE\_KEY\_VALUE\_TABLE\_NAME
+	- SQLITE\_SESSION\_INFO\_TABLE\_NAME
+	- SQLITE\_PAST\_TOKENS\_TABLE\_NAME
 - **License Key**: [See below]
 	- LICENSE_KEY_ID
   
