@@ -50,13 +50,13 @@ then
     echo "sqlite_database_folder_location: \"/sqlite_db\"" >> $CONFIG_FILE
 
     # verify cookie domain is passed
-    if [ -z $COOKIE_DOMAIN ]
+    if [ ! -z $COOKIE_DOMAIN ]
     then
         echo "cookie_domain: \"$COOKIE_DOMAIN\"" >> $CONFIG_FILE
     fi
 
     # verify refresh api path is passed
-    if [ -z $REFRESH_API_PATH ]
+    if [ ! -z $REFRESH_API_PATH ]
     then
         echo "refresh_api_path: \"$REFRESH_API_PATH\"" >> $CONFIG_FILE
     fi
