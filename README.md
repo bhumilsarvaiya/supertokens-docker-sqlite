@@ -1,15 +1,8 @@
 ## About this image
 
 The following parameters are required to start the container:
-- `dev` / `production` mode
 - `config.yaml` environment variables (Configuration)
 - License Key file or License Key ID
-
-
-## `dev` / `production` mode
-- The default value of this is `dev`
-- This is the same as what the CLI expects. You can learn more about the differences [here](https://supertokens.io/docs/community/cli/start)
-
 
 ## Configuration
 You can use your own `config.yaml` file as a shared volume or pass the key-values as environment variables. 
@@ -19,8 +12,8 @@ If you do both, only the shared `config.yaml` file will be considered.
 #### Using environment variable
 Available environment variables
 - **Core** [[click for more info](https://supertokens.io/docs/community/configuration/core)]
-	- COOKIE\_DOMAIN \[**required**\]
-	- REFRESH\_API\_PATH \[**required**\]
+	- COOKIE\_DOMAIN
+	- REFRESH\_API\_PATH
 	- SUPERTOKENS\_HOST
 	- SUPERTOKENS\_PORT
 	- ACCESS\_TOKEN\_VALIDITY
@@ -49,11 +42,9 @@ Available environment variables
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e COOKIE_DOMAIN=example.com \
-	-e REFRESH_API_PATH=/example/refresh \
 	-e LICENSE_KEY_ID=yourLicenseKeyID \
 	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite dev
+	-d supertokens/supertokens-sqlite
 ```
 
 #### Using custom config file
@@ -72,7 +63,7 @@ $ docker run \
 	-v /path/to/config.yaml:/usr/lib/supertokens/config.yaml \
 	-e LICENSE_KEY_ID=yourLicenseKeyID \
 	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite dev
+	-d supertokens/supertokens-sqlite
 ```
 
 ## License Key
@@ -87,22 +78,18 @@ Please check this [link](https://supertokens.io/docs/community/about-license-key
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e COOKIE_DOMAIN=example.com \
-	-e REFRESH_API_PATH=/example/path \
 	-e LICENSE_KEY_ID=<your-license-key-id> \
 	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite production
+	-d supertokens/supertokens-sqlite
 ```
 
 #### Using your `licenseKey` file
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e COOKIE_DOMAIN=example.com \
-	-e REFRESH_API_PATH=/example/path \
 	-v /path/to/licenseKey:/usr/lib/supertokens/licenseKey \	
 	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite dev
+	-d supertokens/supertokens-sqlite
 ```
 
 ## Logging
@@ -117,11 +104,9 @@ $ docker run \
 	-v /path/to/logsFolder:/home/logsFolder \
 	-e INFO_LOG_PATH=/home/logsFolder/info.log \
 	-e ERROR_LOG_PATH=/home/logsFolder/error.log \
-	-e COOKIE_DOMAIN=example.com \
-	-e REFRESH_API_PATH=/example/path \
 	-e LICENSE_KEY_ID=yourLicenseKeyId \
 	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite production
+	-d supertokens/supertokens-sqlite
 ```
 
 ## Database storage

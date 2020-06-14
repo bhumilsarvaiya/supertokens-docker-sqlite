@@ -57,46 +57,30 @@ OS=`uname`
 NETWORK_OPTIONS="-p 3567:3567"
 
 #---------------------------------------------------
-# start with cookie domain and refresh API path
-docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh --rm -d --name supertokens supertokens-sqlite:circleci
+# start with no params
+docker run $NETWORK_OPTIONS --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 10s
 
-test_equal `no_of_running_containers` 0 "start with cookie domain and refresh API path"
+test_equal `no_of_running_containers` 0 "start with no params"
 
 #---------------------------------------------------
-# start with license key id and refresh API path
-docker run $NETWORK_OPTIONS -e REFRESH_API_PATH=/auth/refresh -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
-
-sleep 10s
-
-test_equal `no_of_running_containers` 0 "start with license key id and refresh API path"
-
-#---------------------------------------------------
-# start with cookie domain and license key id
-docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
-
-sleep 10s
-
-test_equal `no_of_running_containers` 0 "start with cookie domain and license key id"
-
-#---------------------------------------------------
-# start with cookie domain refresh API path and license key id
-docker run $NETWORK_OPTIONS -e COOKIE_DOMAIN=supertokens.io -e REFRESH_API_PATH=/auth/refresh -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
+# start with license key id
+docker run $NETWORK_OPTIONS -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 17s
 
-test_equal `no_of_running_containers` 1 "start with cookie domain refresh API path and license key id"
+test_equal `no_of_running_containers` 1 "start with license key id"
 
-test_hello "start with cookie domain refresh API path and license key id"
+test_hello "start with license key id"
 
-test_session_post "start with cookie domain refresh API path and license key id"
+test_session_post "start with license key id"
 
 docker rm supertokens -f
 
 #---------------------------------------------------
 # start by sharing config.yaml without license key id
-docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 10s
 
@@ -104,7 +88,7 @@ test_equal `no_of_running_containers` 0 "start by sharing config.yaml without li
 
 #---------------------------------------------------
 # start by sharing config.yaml with license key id
-docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 17s
 
@@ -118,7 +102,7 @@ docker rm supertokens -f
 
 #---------------------------------------------------
 # start by sharing config.yaml and license key file
-docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -v $LICENSE_FILE_PATH:/usr/lib/supertokens/licenseKey --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -v $LICENSE_FILE_PATH:/usr/lib/supertokens/licenseKey --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 17s
 
@@ -134,7 +118,7 @@ rm -rf $LICENSE_FILE_PATH
 
 # ---------------------------------------------------
 # test info path
-docker run $NETWORK_OPTIONS -v $PWD:/home/supertokens -e COOKIE_DOMAIN=supertokens.io -e INFO_LOG_PATH=/home/supertokens/info.log -e ERROR_LOG_PATH=/home/supertokens/error.log -e REFRESH_API_PATH=/auth/refresh -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci
+docker run $NETWORK_OPTIONS -v $PWD:/home/supertokens -e INFO_LOG_PATH=/home/supertokens/info.log -e ERROR_LOG_PATH=/home/supertokens/error.log -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 17s
 
