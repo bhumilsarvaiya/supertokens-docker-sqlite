@@ -48,10 +48,6 @@ test_session_post () {
     fi
 }
 
-LICENSE_FILE_PATH=$PWD/licenseKey
-curl -X GET "https://api.supertokens.io/development/license-key?password=$API_KEY&planType=FREE&onExpiry=NA&expired=False" -H "api-version: 0" -s > $LICENSE_FILE_PATH
-LICENSE_KEY_ID=$(cat $LICENSE_FILE_PATH | jq -r ".info.licenseKeyId")
-
 # setting network options for testing
 OS=`uname`
 NETWORK_OPTIONS="-p 3567:3567"
@@ -60,65 +56,33 @@ NETWORK_OPTIONS="-p 3567:3567"
 # start with no params
 docker run $NETWORK_OPTIONS --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
-sleep 10s
-
-test_equal `no_of_running_containers` 0 "start with no params"
-
-#---------------------------------------------------
-# start with license key id
-docker run $NETWORK_OPTIONS -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
-
 sleep 17s
 
-test_equal `no_of_running_containers` 1 "start with license key id"
+test_equal `no_of_running_containers` 1 "start with no params"
 
-test_hello "start with license key id"
+test_hello "start with no params"
 
-test_session_post "start with license key id"
+test_session_post "start with no params"
 
 docker rm supertokens -f
 
 #---------------------------------------------------
-# start by sharing config.yaml without license key id
+# start by sharing config.yaml
 docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
-sleep 10s
-
-test_equal `no_of_running_containers` 0 "start by sharing config.yaml without license key id"
-
-#---------------------------------------------------
-# start by sharing config.yaml with license key id
-docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
-
 sleep 17s
 
-test_equal `no_of_running_containers` 1 "start by sharing config.yaml with license key id"
+test_equal `no_of_running_containers` 1 "start by sharing config.yaml"
 
-test_hello "start by sharing config.yaml with license key id"
+test_hello "start by sharing config.yaml"
 
-test_session_post "start by sharing config.yaml with license key id"
-
-docker rm supertokens -f
-
-#---------------------------------------------------
-# start by sharing config.yaml and license key file
-docker run $NETWORK_OPTIONS -v $PWD/config.yaml:/usr/lib/supertokens/config.yaml -v $LICENSE_FILE_PATH:/usr/lib/supertokens/licenseKey --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
-
-sleep 17s
-
-test_equal `no_of_running_containers` 1 "start by sharing config.yaml and license key file"
-
-test_hello "start by sharing config.yaml and license key file"
-
-test_session_post "start by sharing config.yaml and license key file"
+test_session_post "start by sharing config.yaml"
 
 docker rm supertokens -f
-
-rm -rf $LICENSE_FILE_PATH
 
 # ---------------------------------------------------
 # test info path
-docker run $NETWORK_OPTIONS -v $PWD:/home/supertokens -e INFO_LOG_PATH=/home/supertokens/info.log -e ERROR_LOG_PATH=/home/supertokens/error.log -e LICENSE_KEY_ID=$LICENSE_KEY_ID --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
+docker run $NETWORK_OPTIONS -v $PWD:/home/supertokens -e INFO_LOG_PATH=/home/supertokens/info.log -e ERROR_LOG_PATH=/home/supertokens/error.log --rm -d --name supertokens supertokens-sqlite:circleci --no-in-mem-db
 
 sleep 17s
 

@@ -1,9 +1,3 @@
-## About this image
-
-The following parameters are required to start the container:
-- `config.yaml` environment variables (Configuration)
-- License Key file or License Key ID
-
 ## Configuration
 You can use your own `config.yaml` file as a shared volume or pass the key-values as environment variables. 
 
@@ -35,14 +29,11 @@ Available environment variables
 	- SQLITE\_KEY\_VALUE\_TABLE\_NAME
 	- SQLITE\_SESSION\_INFO\_TABLE\_NAME
 	- SQLITE\_PAST\_TOKENS\_TABLE\_NAME
-- **License Key**: [See below]
-	- LICENSE_KEY_ID
   
 
 ```bash
 $ docker run \
 	-p 3567:3567 \
-	-e LICENSE_KEY_ID=yourLicenseKeyID \
 	-v /path/to/sqlite_data:/sqlite_db \
 	-d supertokens/supertokens-sqlite
 ```
@@ -61,33 +52,6 @@ $ docker run \
 $ docker run \
 	-p 3567:3567 \
 	-v /path/to/config.yaml:/usr/lib/supertokens/config.yaml \
-	-e LICENSE_KEY_ID=yourLicenseKeyID \
-	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite
-```
-
-## License Key
-You can get your license key from your [SuperTokens dashboard](https://supertokens.io/dashboard).
-
-
-You can either share your `licenseKey` file, or provide the ID as an environment variable. We recommend providing the file since that way you can run the container without giving it internet access.
-
-Please check this [link](https://supertokens.io/docs/community/about-license-keys) to learn more about license keys.
-
-#### Using environment variables
-```bash
-$ docker run \
-	-p 3567:3567 \
-	-e LICENSE_KEY_ID=<your-license-key-id> \
-	-v /path/to/sqlite_data:/sqlite_db \
-	-d supertokens/supertokens-sqlite
-```
-
-#### Using your `licenseKey` file
-```bash
-$ docker run \
-	-p 3567:3567 \
-	-v /path/to/licenseKey:/usr/lib/supertokens/licenseKey \	
 	-v /path/to/sqlite_data:/sqlite_db \
 	-d supertokens/supertokens-sqlite
 ```
@@ -104,7 +68,6 @@ $ docker run \
 	-v /path/to/logsFolder:/home/logsFolder \
 	-e INFO_LOG_PATH=/home/logsFolder/info.log \
 	-e ERROR_LOG_PATH=/home/logsFolder/error.log \
-	-e LICENSE_KEY_ID=yourLicenseKeyId \
 	-v /path/to/sqlite_data:/sqlite_db \
 	-d supertokens/supertokens-sqlite
 ```
