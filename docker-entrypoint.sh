@@ -41,7 +41,7 @@ chown -R supertokens:supertokens /usr/lib/supertokens/
 if [ "$CONFIG_HASH" = "$CONFIG_MD5SUM" ]
 then
 
-    echo "\n" >> $CONFIG_FILE
+    echo "" >> $CONFIG_FILE
 
     echo "sqlite_database_folder_location: \"/sqlite_db\"" >> $CONFIG_FILE
 
