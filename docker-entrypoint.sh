@@ -43,6 +43,12 @@ then
 
     echo "" >> $CONFIG_FILE
 
+    # verify api keys are passed
+    if [ ! -z $API_KEYS ]
+    then
+        echo "api_keys: $API_KEYS" >> $CONFIG_FILE
+    fi
+
     echo "sqlite_database_folder_location: \"/sqlite_db\"" >> $CONFIG_FILE
 
     # verify cookie domain is passed
@@ -191,11 +197,6 @@ then
         echo "sqlite_session_info_table_name: \"$SQLITE_SESSION_INFO_TABLE_NAME\"" >> $CONFIG_FILE
     fi
 
-    # check if sqlite past tokens table name is passed
-    if [ ! -z $SQLITE_PAST_TOKENS_TABLE_NAME ]
-    then
-        echo "sqlite_past_tokens_table_name: \"$SQLITE_PAST_TOKENS_TABLE_NAME\"" >> $CONFIG_FILE
-    fi
 fi
 
 # check if no options has been passed to docker run
